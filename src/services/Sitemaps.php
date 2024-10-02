@@ -32,6 +32,7 @@ use yii\base\Event;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
 use yii\caching\TagDependency;
+use craft\helpers\App;
 
 /**
  * @author    nystudio107
@@ -291,6 +292,13 @@ class Sitemaps extends Component implements SitemapInterface
             }
         }
 
+        /**
+         * Custom edit - Allow replacing the sitemap index site URL to not be the main site url
+         */
+        if($sitemp_index_url = App::env('SEOMATIC_OVERRIDE_SITEMAP_INDEX_URL')) {
+            $url = str_replace(App::env('PRIMARY_SITE_URL'), $sitemp_index_url, $url);
+        }
+
         return $url;
     }
 
@@ -371,6 +379,14 @@ class Sitemaps extends Component implements SitemapInterface
                     null,
                     $siteId
                 );
+
+                /**
+                 * Custom edit - Allow replacing the sitemap index site URL to not be the main site url
+                 */
+                if($sitemp_index_url = App::env('SEOMATIC_OVERRIDE_SITEMAP_INDEX_URL')) {
+                    $url = str_replace(App::env('PRIMARY_SITE_URL'), $sitemp_index_url, $url);
+                }
+                
             } catch (Exception $e) {
                 Craft::error($e->getMessage(), __METHOD__);
             }
