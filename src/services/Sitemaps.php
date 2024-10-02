@@ -296,7 +296,7 @@ class Sitemaps extends Component implements SitemapInterface
          * Custom edit - Allow replacing the sitemap index site URL to not be the main site url
          */
         if($sitemp_index_url = App::env('SEOMATIC_OVERRIDE_SITEMAP_INDEX_URL')) {
-            $url = str_replace(App::env('PRIMARY_SITE_URL'), $sitemp_index_url, $url);
+            $url = str_replace(App::env('HEADLESS_SITE_URL'), $sitemp_index_url, $url);
         }
 
         return $url;
@@ -384,7 +384,7 @@ class Sitemaps extends Component implements SitemapInterface
                  * Custom edit - Allow replacing the sitemap index site URL to not be the main site url
                  */
                 if($sitemp_index_url = App::env('SEOMATIC_OVERRIDE_SITEMAP_INDEX_URL')) {
-                    $url = str_replace(App::env('PRIMARY_SITE_URL'), $sitemp_index_url, $url);
+                    $url = str_replace(App::env('HEADLESS_SITE_URL'), $sitemp_index_url, $url);
                 }
                 
             } catch (Exception $e) {
